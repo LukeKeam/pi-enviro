@@ -12,7 +12,7 @@ After=multi-user.target
 [Service]
 Type=idle
 WorkingDirectory=/pi-enviro
-ExecStart=/bin/bash -c "mount -o remount,rw /pi-enviro && python3 /pi-enviro/main.py"
+ExecStart=/bin/bash -c "python3 /pi-enviro/main.py"
 
 [Install]
 WantedBy=multi-user.target
