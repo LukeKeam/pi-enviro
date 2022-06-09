@@ -102,7 +102,7 @@ def create_enviro(conn, enviro_data):
     :return:
     """
     sql = ''' INSERT INTO enviro(datetime,temperature,pressure,humidity,light,oxidised,reduced,nh3,pm1,pm25,pm10)
-              VALUES(?,?,?,?,?,?,?) '''
+              VALUES(?,?,?,?,?,?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, enviro_data)
     conn.commit()
