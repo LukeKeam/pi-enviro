@@ -4,6 +4,7 @@ from db_connect import db_create_connection
 import os.path
 from db_input import db_send_to_local_db
 from log_write_to_text_file import log_write_to_text_file
+import datetime as date_time
 
 # go to writeable dir
 os.chdir('/pi-enviro')
@@ -394,8 +395,7 @@ def run():
                 # send data to db
                 #########################################################################################
                 # vars
-                import datetime
-                datetime = datetime.datetime.now().strftime()
+                datetime = date_time.datetime.now().isoformat()
                 temperature = comp_temp
                 pressure = raw_press
                 humidity = raw_humid
