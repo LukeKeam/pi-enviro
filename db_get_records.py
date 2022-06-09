@@ -5,6 +5,12 @@ actual data
 1,1,20200825092347.000,-27.701941,153.215176,2.055,,,1,,500.0,500.0,500.0,,2,,1059.9,192.0\r\n\r\nOK\r\n
 """
 import time
+from db_connect import db_create_connection
+
+# db connect
+database = r"data.db"
+db_file = database
+conn = db_create_connection(db_file)
 
 # check db
 def db_select_all(conn):
