@@ -1,5 +1,5 @@
 import time
-import subprocess, threading, datetime
+import subprocess, threading
 from db_connect import db_create_connection
 import os.path
 from db_input import db_send_to_local_db
@@ -32,7 +32,6 @@ def update_check():
     result = subprocess.run(['sudo', 'sh', './git_update.sh'], capture_output=True)
     print('update_check: {0} {1}'.format(result.stdout, result.stderr))
     log_write_to_text_file('update_check: {0} {1}'.format(result.stdout, result.stderr))
-
 
 
 import logging
