@@ -1,0 +1,18 @@
+# sudo nano /lib/systemd/system/pi-enviro.service
+# sudo systemctl restart pi-enviro.service
+# sudo systemctl status pi-enviro.service
+# sudo systemctl enable pi-enviro.service
+# sudo systemctl daemon-reload
+# User=pi?
+
+[Unit]
+Description=pi-enviro
+After=multi-user.target
+
+[Service]
+Type=idle
+WorkingDirectory=/pi-enviro
+ExecStart=/bin/bash -c "mount -o remount,rw /pi-enviro && python3 /pi-enviro/main.py"
+
+[Install]
+WantedBy=multi-user.target
