@@ -1,21 +1,12 @@
 import time
 import subprocess, threading, datetime
 from db_connect import db_create_connection
-from rest_communicate import post_to_server
-import variables
 import os.path
 from db_input import db_send_to_local_db
 from log_write_to_text_file import log_write_to_text_file
 
-# user vars
-token = variables.token
-auth_user_id = variables.auth_user_id
-apn_var = variables.apn_var
-
-
 # go to writeable dir
 os.chdir('/pi-enviro')
-
 
 # log_write_to_text_file('msg')
 log_write_to_text_file('Program Started')
