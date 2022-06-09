@@ -1,5 +1,5 @@
 import time
-import obd, serial, subprocess, threading, datetime
+import subprocess, threading, datetime
 from db_connect import db_create_connection
 from rest_communicate import post_to_server
 import variables
