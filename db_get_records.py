@@ -21,7 +21,7 @@ def db_select_all(conn):
     """
 cur = conn.cursor()
 #
-print('gps')
+print('enviro')
 date_time_from_server = "20200827091549.000"
 cur.execute("SELECT * FROM enviro ORDER BY id DESC LIMIT 500") # " WHERE datetime > {0} ".format(date_time_from_server))
 rows = cur.fetchall()

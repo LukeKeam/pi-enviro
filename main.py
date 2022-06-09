@@ -29,8 +29,8 @@ conn = db_create_connection(db_file)
 
 def update_check():
     result = subprocess.run(['sudo', 'sh', './git_update.sh'], capture_output=True)
-    print('Internet_start: {0} {1}'.format(result.stdout, result.stderr))
-    log_write_to_text_file('Internet_start: {0} {1}'.format(result.stdout, result.stderr))
+    print('update_check: {0} {1}'.format(result.stdout, result.stderr))
+    log_write_to_text_file('update_check: {0} {1}'.format(result.stdout, result.stderr))
 
 
 
