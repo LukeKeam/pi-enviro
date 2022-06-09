@@ -357,6 +357,10 @@ def run():
     # Main loop to read data, display, and send to Luftdaten
     while True:
         try:
+            # add sleep for every i seconds
+            time.sleep(3)
+
+
             curtime = time.time()
             time_since_update = curtime - update_time
 
@@ -504,7 +508,6 @@ def run():
 
 
 if __name__ == '__main__':
-    time.sleep(30)  # testing bonus time for letting the app/pi start
     update_check()
     run()
 
