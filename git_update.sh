@@ -18,7 +18,7 @@ elif [ $LOCAL = $BASE ]; then
     # pull update
     git pull
     # restore variables
-    git pop
+    git stash pop
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
 else

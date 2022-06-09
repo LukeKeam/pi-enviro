@@ -124,7 +124,7 @@ def add_data():
             create_username(conn, user_data)
             # insert database
             # datetime,temperature,pressure,humidity,light,oxidised,reduced,nh3,pm1,pm25,pm10
-            enviro_data = ('2000-01-01 01:02:02.001', '20', '1000', '59', '9', '1', '1', '1', '1', '1', '1', '1')
+            enviro_data = ('2000-01-01 01:02:02.001', '20', '1000', '59', '9', '1', '1', '1', '1', '1', '1')
             create_enviro(conn, enviro_data)
             #
             print('i', i)
