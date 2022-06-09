@@ -395,7 +395,7 @@ def run():
                 # send data to db
                 #########################################################################################
                 # vars
-                datetime = datetime
+                datetime = datetime.datetime.now()
                 temperature = comp_temp
                 pressure = raw_press
                 humidity = raw_humid
