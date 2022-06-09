@@ -360,7 +360,6 @@ def run():
             # add sleep for every i seconds
             time.sleep(3)
 
-
             curtime = time.time()
             time_since_update = curtime - update_time
 
@@ -395,7 +394,7 @@ def run():
                 # send data to db
                 #########################################################################################
                 # vars
-                datetime = datetime.datetime.now()
+                datetime = datetime.datetime.now().strftime()
                 temperature = comp_temp
                 pressure = raw_press
                 humidity = raw_humid
