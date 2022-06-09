@@ -394,6 +394,7 @@ def run():
                 # send data to db
                 #########################################################################################
                 # vars
+                import datetime
                 datetime = datetime.datetime.now().strftime()
                 temperature = comp_temp
                 pressure = raw_press
