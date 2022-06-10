@@ -12,3 +12,8 @@ https://learn.pimoroni.com/article/getting-started-with-enviro-plus#introduction
 Luftdaten
 https://learn.pimoroni.com/article/enviro-plus-and-luftdaten-air-quality-station#testing-the-luftdaten-script
 https://devices.sensor.community/sensors
+
+World Health Organisation
+https://www.who.int/news-room/feature-stories/detail/what-are-the-who-air-quality-guidelines
+https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health
+https://www.who.int/publications/i/item/9789240034228

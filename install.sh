@@ -2,6 +2,8 @@
 echo "make directory /pi-enviro "
 mkdir /pi-enviro
 cd /pi-enviro
+# install git
+sudo apt-get install git -y
 # clone repository
 echo "downloading update"
 git clone https://github.com/LukeKeam/pi-enviro.git .
@@ -27,3 +29,5 @@ ExecStart=/bin/bash -c "python3 /pi-enviro/main.py"
 WantedBy=multi-user.target'
 echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.service
 sudo systemctl enable pi-enviro.service
+# done
+echo "all done"
