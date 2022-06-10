@@ -1,9 +1,13 @@
-This script has enviro script which takes luftdaten_combined.py and puts all data into a sqlite db
+This script has enviro script which takes luftdaten_combined.py and puts all data into a sqlite db it also takes care of the setup of the db and stores all your data everytime it sends data to luftdaten
 
-This script takes care of the setup of the db and stores all your data everytime it sends data to luftdaten
+This assumes you are already installed and working with luftdaten_combined.py
 
+# easy install instructions 
+curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-enviro/master/install.sh && sudo sh ./install.sh
 
-This assumes you are already installed and working
+data is stored in /pi-enviro
+
+Please contribute :)
 
 Links
 https://github.com/pimoroni/enviroplus-python
