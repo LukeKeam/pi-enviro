@@ -503,12 +503,8 @@ def run():
                 display_everything()
 
             if mode == 11:
-                # blank mode, lcd off ?
-                # lcd back on st7735.begin()
-                unit = " "
-                data = " "
-                variables = " "
-                display_text(variables, data, unit)
+                # black background
+                st7735.display(img)
         except Exception as e:
             print(e)
 
