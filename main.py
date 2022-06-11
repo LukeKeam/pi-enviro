@@ -316,8 +316,8 @@ def send_to_luftdaten(values, id):
         return False
 
 # add to db via thread, otherwise screws up time
-def send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10):
-    t = threading.Thread(target=db_send_to_local_db, args=(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10))
+def send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels):
+    t = threading.Thread(target=db_send_to_local_db, args=(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels))
     t.start()
 
 
@@ -354,6 +354,7 @@ def run():
     cpu_temps_len = float(len(cpu_temps))
 
     # Main loop to read data, display, and send to Luftdaten
+    log_write_to_text_file('Starting While Loop')
     while True:
         try:
             # add sleep for every i seconds
@@ -405,9 +406,10 @@ def run():
                 pm1 = float(pm_values.pm_ug_per_m3(1.0))
                 pm25 = raw_pm25
                 pm10 = raw_pm10
+                decibels = ' '
 
                 # send to db
-                send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10)
+                send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels)
                 light = 1
 
 
@@ -505,6 +507,7 @@ def run():
             if mode == 11:
                 # black background
                 st7735.display(img)
+
         except Exception as e:
             print(e)
 

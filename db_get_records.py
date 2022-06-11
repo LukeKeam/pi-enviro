@@ -1,9 +1,4 @@
 # https://www.sqlitetutorial.net/sqlite-python/
-
-"""
-actual data
-1,1,20200825092347.000,-27.701941,153.215176,2.055,,,1,,500.0,500.0,500.0,,2,,1059.9,192.0\r\n\r\nOK\r\n
-"""
 import time
 from db_connect import db_create_connection
 
@@ -20,15 +15,18 @@ def db_select_all(conn):
     :return:
     """
 cur = conn.cursor()
-#
+
+
 print('enviro')
 date_time_from_server = "20200827091549.000"
-cur.execute("SELECT * FROM enviro ORDER BY id DESC LIMIT 500") # " WHERE datetime > {0} ".format(date_time_from_server))
+cur.execute("SELECT * FROM enviro ORDER BY id DESC LIMIT 500")  # " WHERE datetime > {0} ".format(
+# date_time_from_server))
 rows = cur.fetchall()
 for row in rows:
     time.sleep(.02)
     print(row)
-#
+
+
 print('')
 print('users')
 cur.execute("SELECT * FROM user")

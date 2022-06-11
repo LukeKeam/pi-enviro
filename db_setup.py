@@ -54,7 +54,8 @@ def create_tables():
                                     nh3 integer,
                                     pm1 integer,
                                     pm25 integer,
-                                    pm10 integer
+                                    pm10 integer,
+                                    decibels integer,
                                 ); """
 
     """
@@ -101,8 +102,8 @@ def create_enviro(conn, enviro_data):
     :param task:
     :return:
     """
-    sql = ''' INSERT INTO enviro(datetime,temperature,pressure,humidity,light,oxidised,reduced,nh3,pm1,pm25,pm10)
-              VALUES(?,?,?,?,?,?,?,?,?,?,?) '''
+    sql = ''' INSERT INTO enviro(datetime,temperature,pressure,humidity,light,oxidised,reduced,nh3,pm1,pm25,pm10,decibels)
+              VALUES(?,?,?,?,?,?,?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, enviro_data)
     conn.commit()
@@ -124,7 +125,7 @@ def add_data():
             create_username(conn, user_data)
             # insert database
             # datetime,temperature,pressure,humidity,light,oxidised,reduced,nh3,pm1,pm25,pm10
-            enviro_data = ('2000-01-01 01:02:02.001', '20', '1000', '59', '9', '1', '1', '1', '1', '1', '1')
+            enviro_data = ('2000-01-01 01:02:02.001', '20', '1000', '59', '9', '1', '1', '1', '1', '1', '1', '10')
             create_enviro(conn, enviro_data)
             #
             print('i', i)
