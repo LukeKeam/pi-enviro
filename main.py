@@ -508,7 +508,7 @@ def run():
                 unit = " "
                 data = " "
                 variables = " "
-                display_text(variables[mode], data, unit)
+                display_text(variables, data, unit)
         except Exception as e:
             print(e)
 

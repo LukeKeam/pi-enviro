@@ -10,6 +10,9 @@ data is stored in /pi-enviro
 # get data, latest 20 records
 cd /pi-enviro && sudo python3 db_get_records.py | head -20
 
+# change lcd screen 
+Hold your finger over the light sensor for 3secs. As this updates every 3 seconds
+
 
 In the future could have this displayed on a local or remote webserver
 
