@@ -8,7 +8,7 @@ curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-enviro/master/install.sh
 data is stored in /pi-enviro
 
 # get data, latest 20 records
-sudo python3 /pi-enviro/db_get_records.py | head -20
+cd /pi-enviro && sudo python3 db_get_records.py | head -20
 
 
 In the future could have this displayed on a local or remote webserver

@@ -251,9 +251,8 @@ def display_text(variable, data, unit):
     draw.text((0, 0), message, font=font, fill=(0, 0, 0))
     st7735.display(img)
 
+
 # Displays all the text on the 0.96" LCD
-
-
 def display_everything():
     draw.rectangle((0, 0, WIDTH, HEIGHT), (0, 0, 0))
     column_count = 2
@@ -502,6 +501,14 @@ def run():
                 save_data(8, float(raw_pm25))
                 save_data(9, float(raw_pm10))
                 display_everything()
+
+            if mode == 11:
+                # blank mode, lcd off ?
+                # lcd back on st7735.begin()
+                unit = " "
+                data = " "
+                variables = " "
+                display_text(variables[mode], data, unit)
         except Exception as e:
             print(e)
 
