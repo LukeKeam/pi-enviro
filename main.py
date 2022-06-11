@@ -1,10 +1,32 @@
-import time
 import subprocess, threading
 from db_connect import db_create_connection
 import os.path
 from db_input import db_send_to_local_db
 from log_write_to_text_file import log_write_to_text_file
 import datetime as date_time
+import logging
+import sys
+import requests
+import ST7735
+import time
+import colorsys
+from bme280 import BME280
+from pms5003 import PMS5003, ReadTimeoutError
+from subprocess import PIPE, Popen, check_output
+from PIL import Image, ImageDraw, ImageFont
+from fonts.ttf import RobotoMedium as UserFont
+from enviroplus import gas
+try:
+    from smbus2 import SMBus
+except ImportError:
+    from smbus import SMBus
+try:
+    # Transitional fix for breaking change in LTR559
+    from ltr559 import LTR559
+    ltr559 = LTR559()
+except ImportError:
+    import ltr559
+
 
 # go to writeable dir
 os.chdir('/pi-enviro')
@@ -33,30 +55,6 @@ def update_check():
     print('update_check: {0} {1}'.format(result.stdout, result.stderr))
     log_write_to_text_file('update_check: {0} {1}'.format(result.stdout, result.stderr))
 
-
-import logging
-import sys
-import requests
-import ST7735
-import time
-import colorsys
-from bme280 import BME280
-from pms5003 import PMS5003, ReadTimeoutError
-from subprocess import PIPE, Popen, check_output
-from PIL import Image, ImageDraw, ImageFont
-from fonts.ttf import RobotoMedium as UserFont
-from enviroplus import gas
-
-try:
-    from smbus2 import SMBus
-except ImportError:
-    from smbus import SMBus
-try:
-    # Transitional fix for breaking change in LTR559
-    from ltr559 import LTR559
-    ltr559 = LTR559()
-except ImportError:
-    import ltr559
 
 print("""luftdaten_combined.py - This combines the functionality of luftdaten.py and combined.py
 ================================================================================================
@@ -101,7 +99,8 @@ variables = ["temperature",
              "nh3",
              "pm1",
              "pm25",
-             "pm10"]
+             "pm10",
+             "decibels"]
 units = ["C",
          "hPa",
          "%",
@@ -111,7 +110,8 @@ units = ["C",
          "kO",
          "ug/m3",
          "ug/m3",
-         "ug/m3"]
+         "ug/m3",
+         "db"]
 
 # Define your own warning limits
 # The limits definition follows the order of the variables array
@@ -133,6 +133,7 @@ limits = [[4, 18, 25, 35],
           [-1, -1, 40, 50],
           [-1, -1, 450, 550],
           [-1, -1, 200, 300],
+          [-1, -1, 50, 100],
           [-1, -1, 50, 100],
           [-1, -1, 50, 100],
           [-1, -1, 50, 100]]

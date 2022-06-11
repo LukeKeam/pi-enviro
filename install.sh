@@ -29,5 +29,6 @@ ExecStart=/bin/bash -c "python3 /pi-enviro/main.py"
 WantedBy=multi-user.target'
 echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.service
 sudo systemctl enable pi-enviro.service
+sudo systemctl start pi-enviro.service
 # done
 echo "all done"

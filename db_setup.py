@@ -55,7 +55,7 @@ def create_tables():
                                     pm1 integer,
                                     pm25 integer,
                                     pm10 integer,
-                                    decibels integer,
+                                    decibels integer
                                 ); """
 
     """
