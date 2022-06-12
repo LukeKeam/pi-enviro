@@ -5,6 +5,7 @@ from db_input import db_send_to_local_db
 from log_write_to_text_file import log_write_to_text_file
 import datetime as date_time
 import logging
+import variables as variable_file
 import sys
 import requests
 import ST7735
@@ -27,6 +28,7 @@ try:
 except ImportError:
     import ltr559
 from enviroplus.noise import Noise
+
 
 # go to writeable dir
 os.chdir('/pi-enviro')
@@ -384,9 +386,11 @@ def run():
             if time_since_update > 145:
                 values = read_values(comp_temp, raw_press*100,
                                      raw_humid, raw_pm25, raw_pm10)
-                resp = send_to_luftdaten(values, id)
+                if variable_file.Luftdaten == True:
+                    resp = send_to_luftdaten(values, id)
+                    print("Response: {}\n".format("ok" if resp else "failed"))
+
                 update_time = curtime
-                print("Response: {}\n".format("ok" if resp else "failed"))
 
                 #########################################################################################
                 # send data to db
@@ -539,7 +543,8 @@ def run():
 
 
 if __name__ == '__main__':
-    update_check()
+    if variable_file.update == True:
+        update_check()
     run()
 
 
