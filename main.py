@@ -26,7 +26,7 @@ try:
     ltr559 = LTR559()
 except ImportError:
     import ltr559
-
+from enviroplus.noise import Noise
 
 # go to writeable dir
 os.chdir('/pi-enviro')
@@ -99,8 +99,7 @@ variables = ["temperature",
              "nh3",
              "pm1",
              "pm25",
-             "pm10",
-             "decibels"]
+             "pm10"]  # "decibels"]
 units = ["C",
          "hPa",
          "%",
@@ -110,8 +109,7 @@ units = ["C",
          "kO",
          "ug/m3",
          "ug/m3",
-         "ug/m3",
-         "db"]
+         "ug/m3"]  # "db"]
 
 # Define your own warning limits
 # The limits definition follows the order of the variables array
@@ -135,8 +133,7 @@ limits = [[4, 18, 25, 35],
           [-1, -1, 200, 300],
           [-1, -1, 50, 100],
           [-1, -1, 50, 100],
-          [-1, -1, 50, 100],
-          [-1, -1, 50, 100]]
+          [-1, -1, 50, 100]] # , [-1, -1, 50, 100]]
 
 # RGB palette for values on the combined screen
 palette = [(0, 0, 255),           # Dangerously Low
@@ -507,8 +504,36 @@ def run():
 
             if mode == 11:
                 # black background
+                img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
                 st7735.display(img)
+            """
+                # test                
+                disp = ST7735.ST7735(
+                    port=0,
+                    cs=ST7735.BG_SPI_CS_FRONT,
+                    dc=9,
+                    backlight=0,
+                    rotation=90)
+                    
+                    or
+                    
+                    img = Image.new('RGB', (disp.width, disp.height), color=(0, 0, 0))
+                    draw = ImageDraw.Draw(img)
 
+            if mode == 12:
+                data = ''
+                amps = noise.get_amplitudes_at_frequency_ranges([
+                    (100, 200),
+                    (500, 600),
+                    (1000, 1200)
+                ])
+
+                low, mid, high, amp = noise.get_noise_profile()
+                low *= 128
+                mid *= 128
+                high *= 128
+                amp *= 64
+            """
         except Exception as e:
             print(e)
 

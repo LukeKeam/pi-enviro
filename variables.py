@@ -1,1 +1,2 @@
-# empty at this stage
+update = True
+Luftdaten = True
