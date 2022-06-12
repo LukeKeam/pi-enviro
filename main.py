@@ -91,6 +91,8 @@ bme280 = BME280(i2c_dev=bus)
 # Create PMS5003 instance
 pms5003 = PMS5003()
 
+noise = Noise()
+
 # Create a values dict to store the data
 variables = ["temperature",
              "pressure",
@@ -135,7 +137,7 @@ limits = [[4, 18, 25, 35],
           [-1, -1, 200, 300],
           [-1, -1, 50, 100],
           [-1, -1, 50, 100],
-          [-1, -1, 50, 100]] # , [-1, -1, 50, 100]]
+          [-1, -1, 50, 100]]  # , [-1, -1, 50, 100]]
 
 # RGB palette for values on the combined screen
 palette = [(0, 0, 255),           # Dangerously Low
@@ -190,6 +192,7 @@ st7735 = ST7735.ST7735(
     rotation=270,
     spi_speed_hz=10000000
 )
+
 
 # Initialize display
 st7735.begin()
@@ -331,7 +334,7 @@ def run():
 
     # Added for state
     delay = 0.5  # Debounce the proximity tap
-    mode = 10     # The starting mode
+    mode = 11     # The starting mode
     last_page = 0
     light = 1
 
@@ -507,9 +510,16 @@ def run():
                 display_everything()
 
             if mode == 11:
-                # black background
-                img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
-                st7735.display(img)
+                amps = noise.get_amplitudes_at_frequency_ranges([
+                    (100, 200),
+                    (500, 600),
+                    (1000, 1200)
+                ])
+                amps = [n * 32 for n in amps]
+                unit = "db"
+                data = amps
+                display_text(variables[mode], data, unit)
+
             """
                 # test                
                 disp = ST7735.ST7735(
