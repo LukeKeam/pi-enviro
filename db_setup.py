@@ -40,7 +40,6 @@ def create_tables():
                                         token text,
                                         ip_address text
                                     ); """
-
     # temperature,pressure,humidity,light,oxidised,reduced,nh3,pm1,pm25,pm10
     sql_create_enviro_table = """CREATE TABLE IF NOT EXISTS enviro (
                                     id integer PRIMARY KEY,
@@ -57,7 +56,6 @@ def create_tables():
                                     pm10 integer,
                                     decibels integer
                                 ); """
-
     """
     user integer NOT NULL,,
     FOREIGN KEY (user) REFERENCES user (id)
