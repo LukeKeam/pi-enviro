@@ -334,7 +334,7 @@ def run():
 
     # Added for state
     delay = 0.5  # Debounce the proximity tap
-    mode = 11     # The starting mode
+    mode = 10     # The starting mode
     last_page = 0
     light = 1
 
@@ -508,8 +508,9 @@ def run():
                 save_data(8, float(raw_pm25))
                 save_data(9, float(raw_pm10))
                 display_everything()
-
+                """
             if mode == 11:
+
                 amps = noise.get_amplitudes_at_frequency_ranges([
                     (100, 200),
                     (500, 600),
@@ -520,7 +521,7 @@ def run():
                 data = amps
                 display_text(variables[mode], data, unit)
 
-            """
+
                 # test                
                 disp = ST7735.ST7735(
                     port=0,
@@ -550,6 +551,7 @@ def run():
             """
         except Exception as e:
             print(e)
+            log_write_to_text_file('{0}'.format(e))
 
 
 if __name__ == '__main__':
