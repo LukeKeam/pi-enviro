@@ -508,9 +508,15 @@ def run():
                 save_data(8, float(raw_pm25))
                 save_data(9, float(raw_pm10))
                 display_everything()
-                """
-            if mode == 11:
 
+            if mode == 11:
+                variable = "reduced"
+                unit = "kO"
+                data = gas.read_all()
+                data = data.reducing / 1000
+                display_text(variables[mode], data, unit)
+
+                """
                 amps = noise.get_amplitudes_at_frequency_ranges([
                     (100, 200),
                     (500, 600),
