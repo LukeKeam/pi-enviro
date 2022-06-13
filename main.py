@@ -562,8 +562,7 @@ if __name__ == '__main__':
         update_check()
     if variable_file.dashboard == True:
         print('dashboard starting')
-        result = subprocess.run(['/pi-enviro/venv/bin/python', 'gunicorn', '/pi-enviro/app:server', '-b', ':8050'],
-                                capture_output=True)
+        result = subprocess.run(['sh', 'start_webserver.sh'], capture_output=True)
         print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
         log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
     run()
