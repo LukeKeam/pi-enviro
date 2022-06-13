@@ -1,7 +1,4 @@
 import subprocess, threading
-
-import gunicorn
-
 from db_connect import db_create_connection
 import os.path
 from db_input import db_send_to_local_db
