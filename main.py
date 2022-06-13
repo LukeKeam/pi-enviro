@@ -1,4 +1,7 @@
 import subprocess, threading
+
+import gunicorn
+
 from db_connect import db_create_connection
 import os.path
 from db_input import db_send_to_local_db
@@ -544,16 +547,15 @@ def run():
             if mode == 12:
                 data = ''
                 amps = noise.get_amplitudes_at_frequency_ranges([
-                    (100, 200),
-                    (500, 600),
-                    (1000, 1200)
+                    (10, 10000)
                 ])
-
-                low, mid, high, amp = noise.get_noise_profile()
-                low *= 128
-                mid *= 128
-                high *= 128
-                amp *= 64
+                # amps = [n * 32 for n in amps]
+                img2 = img.copy()
+                draw.rectangle((0, 0, disp.width, disp.height), (0, 0, 0))
+                img.paste(img2, (1, 0))
+                draw.line((0, 0, 0, amps[0]), fill=(0, 0, 255))
+                disp.display(img)
+                print(amps)
             """
         except Exception as e:
             print(e)
@@ -563,6 +565,11 @@ def run():
 if __name__ == '__main__':
     if variable_file.update == True:
         update_check()
+    if variable_file.dashboard == True:
+        print('dashboard starting')
+        result = subprocess.run(['sudo', 'gunicorn', 'app:server', '-b', ':8050'], capture_output=True)
+        print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+        log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
     run()
 
 
