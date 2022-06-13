@@ -567,6 +567,6 @@ def run():
 if __name__ == '__main__':
     if variable_file.update == True:
         update_check()
+    run()
     if variable_file.dashboard == True:
         dashboard_start()
-    run()
