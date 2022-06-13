@@ -1,4 +1,4 @@
 #!/bin/sh
+source /pi-enviro/venv/bin/activate
 cd /pi-enviro
-# exec source venv/bin/activate
-exec gunicorn app:server -b :8050
+gunicorn app:server -b :8050
