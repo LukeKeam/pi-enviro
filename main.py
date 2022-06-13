@@ -57,6 +57,11 @@ def update_check():
     print('update_check: {0} {1}'.format(result.stdout, result.stderr))
     log_write_to_text_file('update_check: {0} {1}'.format(result.stdout, result.stderr))
 
+def dashboard_start():
+    result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
+    print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+    log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+
 
 print("""luftdaten_combined.py - This combines the functionality of luftdaten.py and combined.py
 ================================================================================================
@@ -326,6 +331,8 @@ def send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduc
 
 
 def run():
+    print('running run')
+    log_write_to_text_file('running run')
     # Compensation factor for temperature
     comp_factor = 1
 
@@ -561,8 +568,5 @@ if __name__ == '__main__':
     if variable_file.update == True:
         update_check()
     if variable_file.dashboard == True:
-        print('dashboard starting')
-        result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
-        print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
-        log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+        dashboard_start()
     run()

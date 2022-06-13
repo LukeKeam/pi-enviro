@@ -16,7 +16,7 @@ db_file = database
 conn = db_create_connection(db_file)
 cur = conn.cursor()
 
-# db get 500 records
+# db get records
 data = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 50000", conn)
 data.sort_values("datetime", inplace=True)
 
@@ -28,8 +28,8 @@ app.title = "pi-enviro brought to you by techgeek.biz"
 # html
 app.layout = html.Div(
     children=[
-        html.Div(children=[html.H1(children="pi-enviro brought to you by techgeek.biz", className="header-title"),
-                           html.P(children="Description: pi-enviro brought to you by techgeek.biz",
+        html.Div(children=[html.H1(children="pi-enviro", className="header-title"),
+                           html.P(children="Brought to you by techgeek.biz",
                                   className="header-description", ), ], className="header", ),
         html.Div(children=[
             html.Div(dcc.Graph(figure={"data": [{

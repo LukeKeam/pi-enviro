@@ -108,6 +108,9 @@ def create_enviro(conn, enviro_data):
     return cur.lastrowid
 
 
+"""
+
+for testing
 ###################################################################
 # insert data into all
 ###################################################################
@@ -134,4 +137,4 @@ def add_data():
 if __name__ == '__main__':
     create_tables()
     add_data()
-
+"""

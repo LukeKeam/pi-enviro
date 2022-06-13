@@ -22,8 +22,8 @@ Please contribute :)
 
 # Links
 https://techgeek.biz <br />
-https://github.com/pimoroni/enviroplus-python  <br/>
-https://learn.pimoroni.com/article/getting-started-with-enviro-plus#introduction <br/>
+https://github.com/pimoroni/enviroplus-python for enviro+ <br/>
+https://learn.pimoroni.com/article/getting-started-with-enviro-plus#introduction for enviro+<br/>
 
 # Luftdaten
 https://learn.pimoroni.com/article/enviro-plus-and-luftdaten-air-quality-station#testing-the-luftdaten-script <br/>
