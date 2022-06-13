@@ -17,7 +17,7 @@ conn = db_create_connection(db_file)
 cur = conn.cursor()
 
 # db get 500 records
-data = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 500", conn)
+data = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 50000", conn)
 data.sort_values("datetime", inplace=True)
 
 # site setup
