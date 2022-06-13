@@ -2,8 +2,8 @@
 curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-enviro/master/install.sh && sudo sh ./install.sh
 
 # notes
-This script has enviro script which takes luftdaten_combined.py and puts all data into a sqlite db it also takes care of the setup of the db and stores all your data everytime it sends data to luftdaten
-This assumes you are already installed and working with luftdaten_combined.py
+This script has enviro script which takes luftdaten_combined.py and puts all data into a sqlite db it also takes care of the setup of the db and stores all your data everytime it sends data to luftdaten <br />
+This assumes you are already installed and working with luftdaten_combined.py <br />
 All data is stored in /pi-enviro
 
 # Web-server available:
@@ -20,15 +20,15 @@ Hold your finger over the light sensor for 3secs. As this updates every 3 second
 Please contribute :)
 
 # Links
-https://techgeek.biz 
-https://github.com/pimoroni/enviroplus-python 
-https://learn.pimoroni.com/article/getting-started-with-enviro-plus#introduction 
+https://techgeek.biz <br />
+https://github.com/pimoroni/enviroplus-python  <br />
+https://learn.pimoroni.com/article/getting-started-with-enviro-plus#introduction <br />
 
 # Luftdaten
-https://learn.pimoroni.com/article/enviro-plus-and-luftdaten-air-quality-station#testing-the-luftdaten-script 
+https://learn.pimoroni.com/article/enviro-plus-and-luftdaten-air-quality-station#testing-the-luftdaten-script <br />
 https://devices.sensor.community/sensors 
 
 # World Health Organisation links to some guidelins
-https://www.who.int/news-room/feature-stories/detail/what-are-the-who-air-quality-guidelines 
-https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health 
-https://www.who.int/publications/i/item/9789240034228 
+https://www.who.int/news-room/feature-stories/detail/what-are-the-who-air-quality-guidelines <br />
+https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health <br />
+https://www.who.int/publications/i/item/9789240034228 <br />
