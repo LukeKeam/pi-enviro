@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Thanks for choosing pi-enviro from techgeek.biz
 This setup will take a while with the dashboard part"
 # creat dir /pi-enviro
