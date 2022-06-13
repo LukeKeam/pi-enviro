@@ -17,6 +17,7 @@ from subprocess import PIPE, Popen, check_output
 from PIL import Image, ImageDraw, ImageFont
 from fonts.ttf import RobotoMedium as UserFont
 from enviroplus import gas
+
 try:
     from smbus2 import SMBus
 except ImportError:
@@ -24,11 +25,11 @@ except ImportError:
 try:
     # Transitional fix for breaking change in LTR559
     from ltr559 import LTR559
+
     ltr559 = LTR559()
 except ImportError:
     import ltr559
 from enviroplus.noise import Noise
-
 
 # go to writeable dir
 os.chdir('/pi-enviro')
@@ -36,15 +37,14 @@ os.chdir('/pi-enviro')
 # log_write_to_text_file('msg')
 log_write_to_text_file('Program Started')
 
-
 # test for database & create one if not exist
 my_file = os.path.isfile("data.db")
 if my_file == False:
     import db_setup
+
     db_setup.create_tables()
     db_setup.add_data()
     print("Created db")
-
 
 # db connect
 database = r"data.db"
@@ -86,7 +86,6 @@ bus = SMBus(1)
 
 # Create BME280 instance
 bme280 = BME280(i2c_dev=bus)
-
 
 # Create PMS5003 instance
 pms5003 = PMS5003()
@@ -140,11 +139,11 @@ limits = [[4, 18, 25, 35],
           [-1, -1, 50, 100]]  # , [-1, -1, 50, 100]]
 
 # RGB palette for values on the combined screen
-palette = [(0, 0, 255),           # Dangerously Low
-           (0, 255, 255),         # Low
-           (0, 255, 0),           # Normal
-           (255, 255, 0),         # High
-           (255, 0, 0)]           # Dangerously High
+palette = [(0, 0, 255),  # Dangerously Low
+           (0, 255, 255),  # Low
+           (0, 255, 0),  # Normal
+           (255, 255, 0),  # High
+           (255, 0, 0)]  # Dangerously High
 values_lcd = {}
 
 
@@ -193,7 +192,6 @@ st7735 = ST7735.ST7735(
     spi_speed_hz=10000000
 )
 
-
 # Initialize display
 st7735.begin()
 
@@ -213,6 +211,7 @@ message = ""
 
 # The position of the top bar
 top_pos = 25
+
 
 # Saves the data to be used in the graphs later and prints to the log
 
@@ -248,7 +247,7 @@ def display_text(variable, data, unit):
         draw.rectangle((i, top_pos, i + 1, HEIGHT), (r, g, b))
         # Draw a line graph in black
         line_y = HEIGHT - \
-            (top_pos + (colours[i] * (HEIGHT - top_pos))) + top_pos
+                 (top_pos + (colours[i] * (HEIGHT - top_pos))) + top_pos
         draw.rectangle((i, line_y, i + 1, line_y + 1), (0, 0, 0))
     # Write the text at the top in black
     draw.text((0, 0), message, font=font, fill=(0, 0, 0))
@@ -318,9 +317,11 @@ def send_to_luftdaten(values, id):
     else:
         return False
 
+
 # add to db via thread, otherwise screws up time
 def send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels):
-    t = threading.Thread(target=db_send_to_local_db, args=(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels))
+    t = threading.Thread(target=db_send_to_local_db, args=(
+    datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels))
     t.start()
 
 
@@ -331,17 +332,14 @@ def run():
     # Raspberry Pi ID to send to Luftdaten
     id = "raspi-" + get_serial_number()
 
-
     # Added for state
     delay = 0.5  # Debounce the proximity tap
-    mode = 10     # The starting mode
+    mode = 10  # The starting mode
     last_page = 0
     light = 1
 
-
     for v in variables:
         values_lcd[v] = [1] * WIDTH
-
 
     # Text settings
     font_size = 16
@@ -387,7 +385,7 @@ def run():
                 raw_pm10 = pm_values.pm_ug_per_m3(10)
 
             if time_since_update > 145:
-                values = read_values(comp_temp, raw_press*100,
+                values = read_values(comp_temp, raw_press * 100,
                                      raw_humid, raw_pm25, raw_pm10)
                 if variable_file.Luftdaten == True:
                     resp = send_to_luftdaten(values, id)
@@ -414,9 +412,9 @@ def run():
                 decibels = ' '
 
                 # send to db
-                send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels)
+                send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10,
+                           decibels)
                 light = 1
-
 
             # Now comes the combined.py functionality:
             # If the proximity crosses the threshold, toggle the mode
@@ -564,9 +562,7 @@ if __name__ == '__main__':
         update_check()
     if variable_file.dashboard == True:
         print('dashboard starting')
-        result = subprocess.run(['source', 'venv/bin/activate', '&&', 'gunicorn', 'app:server', '-b', ':8050'],capture_output=True)
+        result = subprocess.run(['venv/bin/python', 'gunicorn', 'app:server', '-b', ':8050'], capture_output=True)
         print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
         log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
     run()
-
-
