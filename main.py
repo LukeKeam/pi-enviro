@@ -1,22 +1,24 @@
-import subprocess, threading
-from db_connect import db_create_connection
-import os.path
-from db_input import db_send_to_local_db
-from log_write_to_text_file import log_write_to_text_file
+import colorsys
 import datetime as date_time
 import logging
-import variables as variable_file
-import sys
-import requests
-import ST7735
+import os.path
+import subprocess
+import threading
 import time
-import colorsys
-from bme280 import BME280
-from pms5003 import PMS5003, ReadTimeoutError
 from subprocess import PIPE, Popen, check_output
+
+import ST7735
+import requests
 from PIL import Image, ImageDraw, ImageFont
-from fonts.ttf import RobotoMedium as UserFont
+from bme280 import BME280
 from enviroplus import gas
+from fonts.ttf import RobotoMedium as UserFont
+from pms5003 import PMS5003, ReadTimeoutError
+
+import variables as variable_file
+from db_connect import db_create_connection
+from db_input import db_send_to_local_db
+from log_write_to_text_file import log_write_to_text_file
 
 try:
     from smbus2 import SMBus
@@ -58,9 +60,12 @@ def update_check():
     log_write_to_text_file('update_check: {0} {1}'.format(result.stdout, result.stderr))
 
 def dashboard_start():
-    result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
-    print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
-    log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+    def process():
+        result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
+        print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+        log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+    t = threading.Thread(target=process, args=())
+    t.start()
 
 
 print("""luftdaten_combined.py - This combines the functionality of luftdaten.py and combined.py
@@ -567,6 +572,6 @@ def run():
 if __name__ == '__main__':
     if variable_file.update == True:
         update_check()
-    run()
     if variable_file.dashboard == True:
         dashboard_start()
+    run()
