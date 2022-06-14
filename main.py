@@ -59,11 +59,13 @@ def update_check():
     print('update_check: {0} {1}'.format(result.stdout, result.stderr))
     log_write_to_text_file('update_check: {0} {1}'.format(result.stdout, result.stderr))
 
+
 def dashboard_start():
     def process():
         result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
         print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
         log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+
     t = threading.Thread(target=process, args=())
     t.start()
 
@@ -331,7 +333,7 @@ def send_to_luftdaten(values, id):
 # add to db via thread, otherwise screws up time
 def send_to_db(datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels):
     t = threading.Thread(target=db_send_to_local_db, args=(
-    datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels))
+        datetime, temperature, pressure, humidity, light, oxidised, reduced, nh3, pm1, pm25, pm10, decibels))
     t.start()
 
 
