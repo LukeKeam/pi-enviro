@@ -14,16 +14,15 @@ app = dash.Dash(__name__)
 server = app.server
 app.title = "pi-enviro brought to you by techgeek.biz"
 
-app.layout = html.Div([
-    html.H1(children="pi-enviro", className="header-title"),
-    html.P(children="Brought to you by techgeek.biz", className="header-description"),
-    html.Div(id='graph-content', children=dcc.Interval(id='interval-component', interval=145000, n_intervals=0)),
-])
+app.layout = html.Div(children=[dcc.Interval(id='interval-component', interval=145000, n_intervals=0),
+                                html.H1(children="pi-enviro", className="header-title"),
+                                html.P(children="Brought to you by techgeek.biz", className="header-description"),
+                                html.Div(id='graph-content'),
+                                ])
 
 
 @app.callback(Output('graph-content', 'children'),
               Input('interval-component', 'n_intervals'))
-
 def update_line_chart(n):
     # db connect db get records
     database = r"data.db"
