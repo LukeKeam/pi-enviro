@@ -14,19 +14,17 @@ app = dash.Dash(__name__)
 server = app.server
 app.title = "pi-enviro brought to you by techgeek.biz"
 
-
 app.layout = html.Div([
     html.H1(children="pi-enviro", className="header-title"),
     html.P(children="Brought to you by techgeek.biz", className="header-description"),
     html.Div(id='graph-content'),
-    dash.dcc.Interval(id='interval', interval=145000)
+    dash.dcc.Interval(id='interval-component', interval=145000, n_intervals=0)
 ])
 
 
-@app.callback(
-    Output('graph-content', 'children'),
-    [Input('graph-content', 'children')]
-)
+@app.callback(Output('graph-content', 'children'),
+              Input('interval-component', 'n_intervals'))
+
 def update_line_chart(n):
     # db connect db get records
     database = r"data.db"
@@ -49,15 +47,16 @@ def update_line_chart(n):
     decibels = px.line(df, x=df['datetime'], y=df['decibels'])
 
     return dcc.Graph(figure=temperature), \
-            dcc.Graph(figure=pressure), \
-            dcc.Graph(figure=humidity), \
-            dcc.Graph(figure=light), \
-            dcc.Graph(figure=oxidised), \
-            dcc.Graph(figure=reduced), \
-            dcc.Graph(figure=nh3), \
-            dcc.Graph(figure=pm1), \
-            dcc.Graph(figure=pm10), \
-            dcc.Graph(figure=pm25), \
-            dcc.Graph(figure=decibels)
+           dcc.Graph(figure=pressure), \
+           dcc.Graph(figure=humidity), \
+           dcc.Graph(figure=light), \
+           dcc.Graph(figure=oxidised), \
+           dcc.Graph(figure=reduced), \
+           dcc.Graph(figure=nh3), \
+           dcc.Graph(figure=pm1), \
+           dcc.Graph(figure=pm10), \
+           dcc.Graph(figure=pm25), \
+           dcc.Graph(figure=decibels)
+
 
 app.run_server(debug=True)
