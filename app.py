@@ -19,7 +19,7 @@ app.layout = html.Div([
     html.H1(children="pi-enviro", className="header-title"),
     html.P(children="Brought to you by techgeek.biz", className="header-description"),
     html.Div(id='graph-content'),
-    dash.dcc.Interval(id='interval', interval=1450)
+    dash.dcc.Interval(id='interval', interval=145000)
 ])
 
 
@@ -35,8 +35,6 @@ def update_line_chart(n):
     cur = conn.cursor()
     df = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 50000", conn)
     df.sort_values("datetime", inplace=True)
-
-    dcc.Interval(id='interval', interval=14500)
 
     temperature = px.line(df, x=df['datetime'], y=df['temperature'])
     pressure = px.line(df, x=df['datetime'], y=df['pressure'])
