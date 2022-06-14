@@ -31,7 +31,7 @@ def update_line_chart(n):
     db_file = database
     conn = db_create_connection(db_file)
     cur = conn.cursor()
-    df = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 50000", conn)
+    df = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 500", conn)
     df.sort_values("datetime", inplace=True)
 
     temperature = px.line(df, x=df['datetime'], y=df['temperature'])
