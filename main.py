@@ -15,6 +15,7 @@ from enviroplus import gas
 from fonts.ttf import RobotoMedium as UserFont
 from pms5003 import PMS5003, ReadTimeoutError
 
+import variables
 import variables as variable_file
 from db_connect import db_create_connection
 from db_input import db_send_to_local_db
@@ -384,7 +385,10 @@ def run():
             cpu_temps = cpu_temps[1:] + [cpu_temp]
             avg_cpu_temp = sum(cpu_temps) / cpu_temps_len
             raw_temp = bme280.get_temperature()
-            comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
+            if variables.raw_temp == True:
+                comp_temp = raw_temp
+            if variables.raw_temp == False:
+                comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
 
             raw_press = bme280.get_pressure()
             raw_humid = bme280.get_humidity()

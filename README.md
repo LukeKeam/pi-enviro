@@ -1,6 +1,3 @@
-# todo.
-app.py and app_refresh_test.py testing for dashboard 
-
 # easy install instructions 
 curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-enviro/master/install.sh && sudo sh ./install.sh
 
