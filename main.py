@@ -401,6 +401,9 @@ def run():
             if time_since_update > 145:
                 values = read_values(comp_temp, raw_press * 100,
                                      raw_humid, raw_pm25, raw_pm10)
+                #########################################################################################
+                # send data to Luftdaten
+                #########################################################################################
                 if variable_file.Luftdaten == True:
                     resp = send_to_luftdaten(values, id)
                     print("Response: {}\n".format("ok" if resp else "failed"))
