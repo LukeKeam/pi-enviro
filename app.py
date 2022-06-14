@@ -17,7 +17,7 @@ app.title = "pi-enviro brought to you by techgeek.biz"
 app.layout = html.Div([
     html.H1(children="pi-enviro", className="header-title"),
     html.P(children="Brought to you by techgeek.biz", className="header-description"),
-    html.Div(id='graph-content'),
+    html.Div(id='graph-content', children=dcc.Interval(id='interval-component', interval=145000, n_intervals=0)),
 ])
 
 
@@ -45,8 +45,7 @@ def update_line_chart(n):
     pm10 = px.line(df, x=df['datetime'], y=df['pm10'])
     decibels = px.line(df, x=df['datetime'], y=df['decibels'])
 
-    return dcc.Interval(id='interval-component', interval=145000, n_intervals=0), \
-           dcc.Graph(figure=temperature), \
+    return dcc.Graph(figure=temperature), \
            dcc.Graph(figure=pressure), \
            dcc.Graph(figure=humidity), \
            dcc.Graph(figure=light), \
