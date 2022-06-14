@@ -29,13 +29,28 @@ WantedBy=multi-user.target'
 echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.service
 sudo systemctl enable pi-enviro.service
 sudo systemctl start pi-enviro.service
+append_line='# pi-enviro.dashboard systemctl file
+[Unit]
+Description=pi-enviro
+After=multi-user.target
+
+[Service]
+Type=idle
+WorkingDirectory=/pi-enviro
+ExecStart=/bin/bash -c "python3 /pi-enviro/start_webserver.sh"
+
+[Install]
+WantedBy=multi-user.target'
+echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.dashboard
+sudo systemctl enable pi-enviro.dashboard
+sudo systemctl stop pi-enviro.dashboard
 echo 'Starting pi-enviro! can take a 10mins to get stable readings'
 # install python3 and venv and make venv
 echo "Installing dashboard, this will take a few mins."
 sudo apt-get install python3 python3-venv python-dev libatlas-base-dev -y
 python3 -m venv venv
 source venv/bin/activate
-python3 -m pip install -r requirements.txt # dash==2.5.0 pandas==1.3.5 numpy==1.21.4 gunicorn==20.1.0 colorlover  # pre-compiled versions at https://piwheels.org/
+python3 -m pip install -r requirements.txt  # dash==2.5.0 pandas==1.3.5 numpy==1.21.4 gunicorn==20.1.0 colorlover  # pre-compiled versions at https://piwheels.org/
 sudo iptables -I INPUT -p tcp -m tcp --dport 8050 -j ACCEPT
 # done
 echo "all done!"

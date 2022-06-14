@@ -62,7 +62,7 @@ def update_check():
 
 def dashboard_start():
     def process():
-        result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
+        result = subprocess.run(['sudo', 'systemctl', 'restart', 'pi-enviro.dashboard'], capture_output=True)
         print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
         log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
 
@@ -402,6 +402,12 @@ def run():
                 values = read_values(comp_temp, raw_press * 100,
                                      raw_humid, raw_pm25, raw_pm10)
                 #########################################################################################
+                # restart dashboard for new data
+                #########################################################################################
+                if variable_file.dashboard == True:
+                    dashboard_start()
+
+                #########################################################################################
                 # send data to Luftdaten
                 #########################################################################################
                 if variable_file.Luftdaten == True:
@@ -577,6 +583,4 @@ def run():
 if __name__ == '__main__':
     if variable_file.update == True:
         update_check()
-    if variable_file.dashboard == True:
-        dashboard_start()
     run()
