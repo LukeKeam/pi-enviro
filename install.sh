@@ -38,7 +38,7 @@ After=multi-user.target
 [Service]
 Type=idle
 WorkingDirectory=/pi-enviro
-ExecStart=/bin/bash -c "python3 /pi-enviro/start_webserver.sh"
+ExecStart=/bin/bash -c "sudo bash /pi-enviro/start_webserver.sh"
 
 [Install]
 WantedBy=multi-user.target'
