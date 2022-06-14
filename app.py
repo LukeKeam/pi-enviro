@@ -1,4 +1,3 @@
-import time
 from datetime import date
 from dash import Dash, dcc, html, Input, Output, State, dash
 import plotly.express as px
@@ -19,6 +18,7 @@ app.layout = html.Div([
     html.H1(children="pi-enviro", className="header-title"),
     html.P(children="Brought to you by techgeek.biz",className="header-description"),
     html.Div(id='graph-content'),
+    dash.dcc.Interval(id='interval', interval=14500)
 ])
 
 
@@ -28,8 +28,6 @@ app.layout = html.Div([
 )
 
 def update_line_chart(n):
-    time.sleep(150)
-
     # db connect db get records
     database = r"data.db"
     db_file = database
