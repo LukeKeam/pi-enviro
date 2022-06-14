@@ -27,6 +27,8 @@ app.layout = html.Div([
 )
 
 def update_line_chart(n):
+    time.sleep(150)
+
     # db connect db get records
     database = r"data.db"
     db_file = database
