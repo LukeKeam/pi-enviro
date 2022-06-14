@@ -1,64 +1,86 @@
-from datetime import date
-from dash import Dash, dcc, html, Input, Output, State, dash
-import plotly.express as px
-from db_connect import db_create_connection
+# Run this app with `python app.py` and
+# visit http://127.0.0.1:8050/ in your web browser.
+
+import dash
+from dash import Dash, html, dcc
 import pandas as pd
+import numpy as np
+from dash.dependencies import Output, Input
+from db_connect import db_create_connection
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
+# db connect
+database = r"data.db"
+db_file = database
+conn = db_create_connection(db_file)
+cur = conn.cursor()
 
+# db get records
+data = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 50000", conn)
+data.sort_values("datetime", inplace=True)
 
 # site setup
 app = dash.Dash(__name__)
 server = app.server
 app.title = "pi-enviro brought to you by techgeek.biz"
 
-
-app.layout = html.Div([
-    html.H1(children="pi-enviro", className="header-title"),
-    html.P(children="Brought to you by techgeek.biz",className="header-description"),
-    html.Div(id='graph-content'),
-    dash.dcc.Interval(id='interval', interval=14500)
-])
-
-
-@app.callback(
-    Output('graph-content', 'children'),
-    [Input('graph-content', 'children')]
+# html
+app.layout = dash.dcc.Interval(id='interval', interval=14500)
+html.Div(
+    children=[
+        html.Div(children=[html.H1(children="pi-enviro", className="header-title"),
+                           html.P(children="Brought to you by techgeek.biz",
+                                  className="header-description", ), ], className="header", ),
+        html.Div(children=[
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["temperature"],
+                "type": "lines", }, ], "layout": {"title": "temperature"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["pressure"],
+                "type": "lines", }, ], "layout": {"title": "pressure"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["humidity"],
+                "type": "lines", }, ], "layout": {"title": "humidity"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["light"],
+                "type": "lines", }, ], "layout": {"title": "light"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["oxidised"],
+                "type": "lines", }, ], "layout": {"title": "oxidised"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["reduced"],
+                "type": "lines", }, ], "layout": {"title": "reduced"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["nh3"],
+                "type": "lines", }, ], "layout": {"title": "nh3"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["pm1"],
+                "type": "lines", }, ], "layout": {"title": "pm1"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["pm25"],
+                "type": "lines", }, ], "layout": {"title": "pm25"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["pm10"],
+                "type": "lines", }, ], "layout": {"title": "pm10"}, }, ), ),
+            html.Div(dcc.Graph(figure={"data": [{
+                "x": data["datetime"],
+                "y": data["decibels"],
+                "type": "lines", }, ], "layout": {"title": "decibels"}, }, ), ),
+        ], className="wrapper",
+        ),
+    ]
 )
 
-def update_line_chart(n):
-    # db connect db get records
-    database = r"data.db"
-    db_file = database
-    conn = db_create_connection(db_file)
-    cur = conn.cursor()
-    df = pd.read_sql("SELECT * FROM enviro ORDER BY id DESC LIMIT 50000", conn)
-    df.sort_values("datetime", inplace=True)
-
-
-    temperature = px.line(df, x=df['datetime'], y=df['temperature'])
-    pressure = px.line(df, x=df['datetime'], y=df['pressure'])
-    humidity = px.line(df, x=df['datetime'], y=df['humidity'])
-    light = px.line(df, x=df['datetime'], y=df['light'])
-    oxidised = px.line(df, x=df['datetime'], y=df['oxidised'])
-    reduced = px.line(df, x=df['datetime'], y=df['reduced'])
-    nh3 = px.line(df, x=df['datetime'], y=df['nh3'])
-    pm1 = px.line(df, x=df['datetime'], y=df['pm1'])
-    pm25 = px.line(df, x=df['datetime'], y=df['pm25'])
-    pm10 = px.line(df, x=df['datetime'], y=df['pm10'])
-    decibels = px.line(df, x=df['datetime'], y=df['decibels'])
-
-    return dcc.Graph(figure=temperature), \
-            dcc.Graph(figure=pressure), \
-            dcc.Graph(figure=humidity), \
-            dcc.Graph(figure=light), \
-            dcc.Graph(figure=oxidised), \
-            dcc.Graph(figure=reduced), \
-            dcc.Graph(figure=nh3), \
-            dcc.Graph(figure=pm1), \
-            dcc.Graph(figure=pm10), \
-            dcc.Graph(figure=pm25), \
-            dcc.Graph(figure=decibels)
-
-app.run_server(debug=True)
+if __name__ == "__main__":
+    app.run_server(debug=True)
