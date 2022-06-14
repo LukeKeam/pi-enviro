@@ -1,14 +1,9 @@
-# Run this app with `python app.py` and
-# visit http://127.0.0.1:8050/ in your web browser.
-
 import dash
 import pandas as pd
 from dash import html, dcc
 
 from db_connect import db_create_connection
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
 # db connect
 database = r"data.db"
 db_file = database
