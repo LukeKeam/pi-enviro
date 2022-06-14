@@ -62,7 +62,7 @@ def update_check():
 
 def dashboard_start():
     def process():
-        result = subprocess.run(['sudo', 'systemctl', 'restart', 'pi-enviro.dashboard'], capture_output=True)
+        result = subprocess.run(['sudo', 'systemctl', 'restart', 'pi-enviro.dashboard.service'], capture_output=True)
         print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
         log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
 

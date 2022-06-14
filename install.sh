@@ -29,9 +29,10 @@ WantedBy=multi-user.target'
 echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.service
 sudo systemctl enable pi-enviro.service
 sudo systemctl start pi-enviro.service
-append_line='# pi-enviro.dashboard systemctl file
+# make dashboard service
+append_line='# pi-enviro.dashboard.service systemctl file
 [Unit]
-Description=pi-enviro
+Description=pi-enviro.dashboard.service
 After=multi-user.target
 
 [Service]
@@ -41,9 +42,9 @@ ExecStart=/bin/bash -c "python3 /pi-enviro/start_webserver.sh"
 
 [Install]
 WantedBy=multi-user.target'
-echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.dashboard
-sudo systemctl enable pi-enviro.dashboard
-sudo systemctl stop pi-enviro.dashboard
+echo "$append_line" | sudo tee /lib/systemd/system/pi-enviro.dashboard.service
+sudo systemctl enable pi-enviro.dashboard.service
+sudo systemctl stop pi-enviro.dashboard.service
 echo 'Starting pi-enviro! can take a 10mins to get stable readings'
 # install python3 and venv and make venv
 echo "Installing dashboard, this will take a few mins."
