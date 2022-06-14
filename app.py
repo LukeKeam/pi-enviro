@@ -2,10 +2,9 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-from dash import Dash, html, dcc
 import pandas as pd
-import numpy as np
-from dash.dependencies import Output, Input
+from dash import html, dcc
+
 from db_connect import db_create_connection
 
 # assume you have a "long-form" data frame

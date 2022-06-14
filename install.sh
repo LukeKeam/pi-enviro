@@ -35,7 +35,7 @@ echo "Installing dashboard, this will take a few mins."
 sudo apt-get install python3 python3-venv python-dev libatlas-base-dev -y
 python3 -m venv venv
 source venv/bin/activate
-python3 -m pip install dash==2.5.0 pandas==1.3.5 numpy==1.21.4 gunicorn==20.1.0 colorlover  # pre-compiled versions at https://piwheels.org/
+python3 -m pip install -r requirements.txt # dash==2.5.0 pandas==1.3.5 numpy==1.21.4 gunicorn==20.1.0 colorlover  # pre-compiled versions at https://piwheels.org/
 sudo iptables -I INPUT -p tcp -m tcp --dport 8050 -j ACCEPT
 # done
 echo "all done!"
