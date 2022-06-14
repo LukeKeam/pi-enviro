@@ -61,13 +61,10 @@ def update_check():
 
 
 def dashboard_start():
-    def process():
-        result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
-        print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
-        log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+    result = subprocess.run(['bash', 'start_webserver.sh'], capture_output=True)
+    print('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
+    log_write_to_text_file('dashboard starting: {0} {1}'.format(result.stdout, result.stderr))
 
-    t = threading.Thread(target=process, args=())
-    t.start()
 
 
 print("""luftdaten_combined.py - This combines the functionality of luftdaten.py and combined.py
@@ -578,5 +575,6 @@ if __name__ == '__main__':
     if variable_file.update == True:
         update_check()
     if variable_file.dashboard == True:
-        dashboard_start()
+        t = threading.Thread(target=dashboard_start(), args=())
+        t.start()
     run()
