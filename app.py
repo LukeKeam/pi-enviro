@@ -1,3 +1,4 @@
+import time
 from datetime import date
 from dash import Dash, dcc, html, Input, Output, State, dash
 import plotly.express as px
