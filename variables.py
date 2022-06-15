@@ -1,4 +1,4 @@
 update = True
 Luftdaten = True
 dashboard = True
-raw_temp = True  # Uses temperature straight from board or False for raw - average cpu temp
+raw_temp = False  # Uses temperature straight from board or False for raw - average cpu temp
