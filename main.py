@@ -385,10 +385,12 @@ def run():
             cpu_temps = cpu_temps[1:] + [cpu_temp]
             avg_cpu_temp = sum(cpu_temps) / cpu_temps_len
             raw_temp = bme280.get_temperature()
+            """
             if variables.raw_temp == True:
                 comp_temp = raw_temp
             if variables.raw_temp == False:
                 comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
+            """
 
             raw_press = bme280.get_pressure()
             raw_humid = bme280.get_humidity()
