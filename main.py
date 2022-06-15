@@ -386,9 +386,9 @@ def run():
             avg_cpu_temp = sum(cpu_temps) / cpu_temps_len
             raw_temp = bme280.get_temperature()
 
-            if variables.raw_temp_bool == True:
+            if variable_file.raw_temp_bool == True:
                 comp_temp = raw_temp
-            if variables.raw_temp_bool == False:
+            if variable_file.raw_temp_bool == False:
                 comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
             #  comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
 
