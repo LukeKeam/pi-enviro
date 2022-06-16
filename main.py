@@ -388,7 +388,7 @@ def run():
 
             if variable_file.raw_temp_bool == True:
                 comp_temp = raw_temp
-            if variable_file.raw_temp_bool == False:
+            else:
                 comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
             #  comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
 
@@ -584,7 +584,8 @@ def run():
         except Exception as e:
             print(e)
             log_write_to_text_file('{0}'.format(e))
-
+            time.sleep(30)
+            run()
 
 if __name__ == '__main__':
     if variable_file.update == True:
