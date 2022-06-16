@@ -388,7 +388,7 @@ def run():
 
             if variable_file.raw_temp_bool == True:
                 comp_temp = raw_temp
-            else:
+            if variable_file.raw_temp_bool == False:
                 comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
             #  comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / comp_factor)
 
