@@ -21,8 +21,11 @@ Hold your finger over the light sensor for 3secs. As this updates every 3 second
 Please contribute :)
 
 # Links
-https://techgeek.biz <br />
-https://github.com/pimoroni/enviroplus-python for enviro+ <br/>
+https://techgeek.biz/en/pi-enviro-dashboard-using-enviro/ <br/>
+https://techgeek.biz/en/pi-enviro-dashboard-using-enviro/ <br/>
+https://techgeek.biz <br/>
+<br/>
+https://github.com/pimoroni/enviroplus-python <br/>
 https://learn.pimoroni.com/article/getting-started-with-enviro-plus#introduction for enviro+<br/>
 
 # Luftdaten
