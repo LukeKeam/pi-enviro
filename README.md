@@ -8,7 +8,7 @@ All data is stored in /pi-enviro <br/>
 Tested on a raspberry pi zero w
 
 # Web-server available:
-From http://IpOfPi:8050 for dashboard or if you changed your hostname to pi-enviro it can be http://pi-enviro:8050/
+From http://IP:8050 for dashboard or if you changed your hostname to pi-enviro it can be http://pi-enviro:8050/
 
 # get data, latest 20 records
 cd /pi-enviro && sudo python3 db_get_records.py | head -20
