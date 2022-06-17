@@ -2,8 +2,8 @@
 curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-enviro/master/install.sh && sudo sh ./install.sh
 
 # notes
+This assumes you are already installed and working with luftdaten_combined.py, or set the variable file to False <br/>
 This script has enviro script which takes luftdaten_combined.py and puts all data into a sqlite db it also takes care of the setup of the db and stores all your data everytime it sends data to luftdaten <br/>
-This assumes you are already installed and working with luftdaten_combined.py <br/>
 All data is stored in /pi-enviro <br/>
 Tested on a raspberry pi zero w
 
